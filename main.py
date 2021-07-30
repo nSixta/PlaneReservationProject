@@ -1,24 +1,46 @@
 import sys
 
 
-def showSeats(seats):
-    for row in range(len(seats)):
-        for col in range(len(seats[row])):
-            print(seats[row][col], end=' ')
-        print()
-    yesOrNo = input("\nWould you like to enter another number? Y/N: ")
-    if yesOrNo.lower() == "y":
+def enterAnotherNumber(seats):
+    yes_no = input("\nWould you like to enter another number? Y/N: ")
+    if yes_no.lower() == "y":
         inputNumberToNavigate(seats)
-    if yesOrNo.lower() == "n":
+    if yes_no.lower() == "n":
         sys.exit("Thank You For Using This Plane Reservation System")
     else:
         print("Enter Y/N")
 
 
+def showSeats(seats):
+    for row in range(len(seats)):
+        for col in range(len(seats[row])):
+            print(seats[row][col], end=' ')
+        print()
+    enterAnotherNumber(seats)
+
+
+def searchSeat(seat, seats_list):
+    seatAvailable = False
+    for row in range(len(seats_list)):
+        for col in range(len(seats_list[row])):
+            if seats_list[row][col] == seat:
+                seatAvailable = True
+    if seatAvailable:
+        print("Seat: " + seat + " is available to reserve")
+    else:
+        print("Seat: " + seat + " is NOT available to reserve")
+
+
 def inputNumberToNavigate(seats):
-    numberInput = input("Type number here: ")
-    if numberInput == "1":
+    number_input = input("Type number here: ")
+    if number_input == "1":
         showSeats(seats)
+    if number_input == "3":
+        seat_input = input("Enter a seat to search: ")
+        searchSeat(seat_input, seats)
+        # enterAnotherNumber(seats)
+    if number_input == "4":
+        sys.exit("Thank You For Using This Plane Reservation System")
     else:
         print("Enter numbers 1, 2, 3, 4")
         inputNumberToNavigate(seats)
